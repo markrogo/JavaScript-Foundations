@@ -153,34 +153,31 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
 
-// function variableInterestRate (principal, interestRate, years, creditScore) {
+function variableInterestRate (principal, interestRate, years, creditScore) {
 
-//     var start = interestRate - .02;
-//     var end = interestRate + .02;
-//     console.log (start, end);
-//     // for (i =  (interestRate - .02) ; i = (interestRate + .02) ; i + .005) {
-//     // for (i =  .05 ; i = .08 ; i++) {
-
-//         let monthlyInterestRate  = i / 12;
-//         let periods = years*12;
-//         let n1 = Math.pow ((1 + monthlyInterestRate ), periods);
-//         let numerator = principal * n1 * monthlyInterestRate;
-//         let denominator = n1 - 1;
-//         let monthlyRate = numerator / denominator;
+ 
+    for (i =  (interestRate - .02) ; i <= (interestRate + .02) ; i = i + .005) {
+    
+        let monthlyInterestRate  = i / 12;
+        let periods = years*12;
+        let n1 = Math.pow ((1 + monthlyInterestRate ), periods);
+        let numerator = principal * n1 * monthlyInterestRate;
+        let denominator = n1 - 1;
+        let monthlyRate = numerator / denominator;
         
 
-//         if (creditScore < 660) {
-//             monthlyRate = monthlyRate * 1.05;
-//         } else if (creditScore > 740) {
-//             monthlyRate = monthlyRate * 0.95;
-//         }
+        if (creditScore < 660) {
+            monthlyRate = monthlyRate * 1.05;
+        } else if (creditScore > 740) {
+            monthlyRate = monthlyRate * 0.95;
+        }
 
-//         monthlyRate = (monthlyRate.toFixed(0));
-//         console.log (name + " with an interest rate of " + interestRate + " your monthly rate is $" + monthlyRate);
-//     // }
-// }
-mortgageCalculator (200000, 0.05, 30, 800);
-// variableInterestRate (200000, 0.05, 30, 700);
+        monthlyRate = (monthlyRate.toFixed(0));
+        console.log (name + " with an interest rate of " + i + " your monthly rate is $" + monthlyRate);
+    }
+
+}
+variableInterestRate(200000, 0.04, 30);
 
 
 
