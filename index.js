@@ -8,6 +8,10 @@ let principal = 200000;
 let interestRate = 0.05;
 let years = 30;
 let creditScore = 700;
+let propertyTaxes = 1000;
+let hoaFees = 400;
+let insurance = 100;
+let totalExpense = 100;
 const name = "Mark";
 console.log (name);
 
@@ -173,7 +177,13 @@ function variableInterestRate (principal, interestRate, years, creditScore) {
         }
 
         monthlyRate = (monthlyRate.toFixed(0));
-        console.log (name + " with an interest rate of " + i + " your monthly rate is $" + monthlyRate);
+        cleanRate = (i.toFixed(3)); 
+
+        if ((cleanRate*100) - Math.floor(cleanRate *100) === 0) {
+            // console.log (cleanRate);
+            cleanRate = i.toFixed(2);
+        }
+        console.log (name + " with an interest rate of " + cleanRate + " your monthly rate is $" + monthlyRate);
     }
 
 }
@@ -187,6 +197,39 @@ variableInterestRate(200000, 0.04, 30);
 
 /*  🏡 Add  `Property Tax`, `Homeowner's insurance` and `HOA fees` as parameters in your function to calculate total monthly spending on housing */
 
+function homeCostCalculator (principal, interestRate, years, creditScore, propertyTaxes, insurance, hoaFees) {
+    let monthlyInterestRate = interestRate / 12;
+    
+    let periods = years*12;
+    let n1 = Math.pow ((1 + monthlyInterestRate ), periods);
+    let numerator = principal * n1 * monthlyInterestRate;
+    let denominator = n1 - 1;
+    let monthlyRate = numerator / denominator;
+    let allOther = (propertyTaxes + insurance + hoaFees);
+    let totalExpense = 0;
+    
+    if (creditScore < 660) {
+        monthlyRate = monthlyRate * 1.05;
+    } else if (creditScore > 740) {
+        monthlyRate = monthlyRate * 0.95;
+    }
+
+    monthlyRate = (monthlyRate.toFixed(2));
+    
+    // Commented out the creditscore prompt in this homeCostCalculator area 
+    // console.log (name + " your monthly rate is " + monthlyRate + " based on a credit score of " + creditScore);
+    
+    // why won't this work without using the Number () around the variables
+    totalExpense = Number(monthlyRate) + Number(allOther);
+    // console.log (allOther);
+    // console.log (totalExpense);
+    console.log ('Your total housing expense including taxes, insurance, and HOA fees is $' + totalExpense);
+}
+
+
+homeCostCalculator (200000, 0.05, 30, 700, 400, 125, 211);
+homeCostCalculator (200000, 0.05, 30, 700, 600, 123, 111);
+homeCostCalculator (200000, 0.05, 30, 700, 0, 0, 0);
 
 /* 🏡 Build a calculator function that accepts `monthly payment` and `interest rate` and returns the maximum loan that a person could afford */
 
