@@ -12,6 +12,8 @@ let propertyTaxes = 1000;
 let hoaFees = 400;
 let insurance = 100;
 let totalExpense = 100;
+let payment = 1000;
+let rateArray = [0.01];
 const name = "Mark";
 console.log (name);
 
@@ -27,7 +29,7 @@ console.log (name);
 // let monthlyInterestRate = interestRate / 12;
 // let periods = years*12;
 
-
+/* This was completed! */
 
 
 
@@ -48,7 +50,7 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 When your math is correct, monthlyRate will equal 1073.64
 */
 
-// This works so moving on
+
 
 // let n1 = Math.pow ((1 + monthlyInterestRate ), periods);
 // let numerator = principal * n1 * monthlyInterestRate;
@@ -61,6 +63,7 @@ When your math is correct, monthlyRate will equal 1073.64
 // console.log (denominator);
 // console.log (monthlyRate);
 
+/* This was completed */
 
 // 🏡 Task 3: Function
 /* Create a function called `mortgageCalculator` that combines all of the steps from task 1 and 2 and returns a sentence "{Name}, your monthly rate is ${monthlyRate}"
@@ -68,15 +71,15 @@ When your math is correct, monthlyRate will equal 1073.64
 If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly rate is 1073.64"
 */
 
-/* this works, so moving on */
+
 
 // function mortgageCalculator () {
 //     monthlyRate = (monthlyRate.toFixed(2));
-//     console.log (name + " your monthly rate is " + monthlyRate);
+//     console.log ("Task 3: " + name + " your monthly rate is " + monthlyRate);
 // }
 
  
-
+/* This was completed */
 
 // 🏡 Task 4: Arguments and Parameters
 /* Substitute the variables in your functions for parameters such that you can substitute `P`, `I`, and `N` when you call the function.
@@ -85,23 +88,20 @@ For example,
 mortgageCalculator(200000, 0.05, 30); <-- should return 1,073.64
 */
 
-// This works so moving on 
-
-// function mortgageCalculator (principal, interestRate, years) {
-//     let monthlyInterestRate = interestRate / 12;
-//     let periods = years*12;
-//     let n1 = Math.pow ((1 + monthlyInterestRate ), periods);
-//     let numerator = principal * n1 * monthlyInterestRate;
-//     let denominator = n1 - 1;
-//     let monthlyRate = numerator / denominator;
-//     monthlyRate = (monthlyRate.toFixed(2));
-//     console.log (name + " your monthly rate is " + monthlyRate);
-// }
-
-// mortgageCalculator (principal, interestRate, years);
-// mortgageCalculator (200000, 0.05, 30);
 
 
+function initialMortgageCalculator (principal, interestRate, years) {
+    let monthlyInterestRate = interestRate / 12;
+    let periods = years*12;
+    let n1 = Math.pow ((1 + monthlyInterestRate ), periods);
+    let numerator = principal * n1 * monthlyInterestRate;
+    let denominator = n1 - 1;
+    let monthlyRate = numerator / denominator;
+    monthlyRate = (monthlyRate.toFixed(2));
+    console.log ("Task 4: "+ monthlyRate);
+}
+
+initialMortgageCalculator(200000, 0.05, 30);
 
 
 // 🏡 Task 5: Conditionals
@@ -130,6 +130,8 @@ function mortgageCalculator (principal, interestRate, years, creditScore) {
 
     monthlyRate = (monthlyRate.toFixed(2));
     console.log (name + " your monthly rate is " + monthlyRate + " based on a credit score of " + creditScore);
+
+    return monthlyRate; // used for stretch goal
 }
 
 // mortgageCalculator (principal, interestRate, years);
@@ -137,8 +139,6 @@ function mortgageCalculator (principal, interestRate, years, creditScore) {
 mortgageCalculator (200000, 0.05, 30, 600);
 mortgageCalculator (200000, 0.05, 30, 700);
 mortgageCalculator (200000, 0.05, 30, 800);
-
-
 
 
 // 🏡 Task 6: Loops
@@ -215,7 +215,7 @@ function homeCostCalculator (principal, interestRate, years, creditScore, proper
     }
 
     monthlyRate = (monthlyRate.toFixed(2));
-    
+
     // Commented out the creditscore prompt in this homeCostCalculator area 
     // console.log (name + " your monthly rate is " + monthlyRate + " based on a credit score of " + creditScore);
     
@@ -236,5 +236,35 @@ homeCostCalculator (200000, 0.05, 30, 700, 0, 0, 0);
 
 /* 🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
 
+principal = prompt("Enter the amount of principal on your mortage", 100000);
+interestRate = prompt("Enter the interest rate as a decimal", .05);
+years = prompt("How long a mortgage are you taking out (in years", 30);
+creditScore = prompt ("What's your credit score (600-850)", 700);
+payment = mortgageCalculator (principal, interestRate, years, creditScore);
+window.alert ("Your prompted mortgage payment is $" + payment);
+
+
 
 /* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!) */
+
+/* accept array of interest rates, removed credit score but could add back in if desired */
+/* this won't log to console until the prompts above have all been handled but it does work */
+
+function multipleInterestRates (principal, years, rateArray) { 
+    for (i = 0 ; i < rateArray.length ; i++) {
+    
+        let monthlyInterestRate  = rateArray[i] / 12;
+        let periods = years*12;
+        let n1 = Math.pow ((1 + monthlyInterestRate ), periods);
+        let numerator = principal * n1 * monthlyInterestRate;
+        let denominator = n1 - 1;
+        let monthlyRate = numerator / denominator;
+        
+        monthlyRate = (monthlyRate.toFixed(0));
+        
+        console.log (name + " with an interest rate of " + rateArray[i] + " your monthly rate is $" + monthlyRate);
+    }
+
+}
+multipleInterestRates(200000, 30, [0.02, 0.03, 0.06]);
+multipleInterestRates(400000, 30, [0.02, 0.03, 0.06]);
